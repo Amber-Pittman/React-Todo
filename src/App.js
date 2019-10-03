@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDom from "react-dom";
+// import ReactDom from "react-dom";
 import Todo from "./components/TodoComponents/Todo";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import TodoList from "./components/TodoComponents/TodoList";
@@ -17,13 +17,25 @@ class App extends React.Component {
     }
   }
 
-  clearCompleted = event => {
+  clearCompleted = event => { // for the clear task button
     event.preventDefault()
 
     this.setState({
       todo:this.state.todo.filter(item => {
         return !item.completed
       })
+    })
+  }
+
+  addTask = (taskName) => { // for the Add button
+    const newTask = {
+      id: Date.now(), // uses current time for ID instead of my numeric system
+      task: taskName,
+      completed: false
+    }
+
+    this.setState({
+      todo: [newTask, ...this.state.todo]
     })
   }
 

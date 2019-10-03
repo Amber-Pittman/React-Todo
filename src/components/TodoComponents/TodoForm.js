@@ -20,7 +20,7 @@ class TodoForm extends React.Component {
     // call the setter function with the new value.
     // function is given to us through props in
     // the parent component.
-    this.props.addItem(event, this.state.value)
+    this.props.addTask(event, this.state.value)
 
     // reset the input field so we can add other items
     this.setState({
