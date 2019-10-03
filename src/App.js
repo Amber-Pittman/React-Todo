@@ -13,14 +13,26 @@ class App extends React.Component {
     super()
 
     this.state = {
-      todo: Todo // uses Todo.js file here
+      todo: Todo // uses Todo data file here
     }
   }
 
   render() {
     return (
       <div>
-        <h2>Welcome to your Todo App!</h2>
+        <div>
+          <h2>Working Parent To Do List</h2>
+          <TodoForm addItem={this.addItem} />
+        </div>
+
+        <div>
+          {this.state.todo.map(item => (
+            <TodoList key={item.id} // use TodoList component here
+                  item={item} 
+                  onClick={(event) => this.toggleItem(event, item.id)}
+            />
+          ))}
+        </div>
       </div>
     );
   }
