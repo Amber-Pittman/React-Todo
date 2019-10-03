@@ -17,11 +17,23 @@ class App extends React.Component {
     }
   }
 
+  clearCompleted = event => {
+    event.preventDefault()
+
+    this.setState({
+      todo:this.state.todo.filter(item => {
+        return !item.completed
+      })
+    })
+  }
+
+
+
   render() {
     return (
       <div>
         <div>
-          <h2>Working Parent To Do List</h2>
+          <h2>The Working Parent To Do List</h2>
           <TodoForm addItem={this.addItem} />
         </div>
 
@@ -32,6 +44,10 @@ class App extends React.Component {
                   onClick={(event) => this.toggleItem(event, item.id)}
             />
           ))}
+
+          <button onClick={this.clearCompleted} >
+            Clear Completed
+          </button>
         </div>
       </div>
     );

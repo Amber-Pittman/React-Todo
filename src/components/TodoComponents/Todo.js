@@ -1,33 +1,33 @@
 export default [
     {
-      name: "Get Kids to School",
+      task: "Get Kids to School",
       id: 100,
-      purchased: false
+      completed: false
     },
     {
-      name: "Daily Standup at Work",
+      task: "Daily Standup at Work",
       id: 200,
-      purchased: false
+      completed: false
     },
     {
-      name: "Touch Base with Clients",
+      task: "Touch Base with Clients",
       id: 300,
-      purchased: false
+      completed: false
     },
     {
-      name: "Follow up with Lead on Bugs",
+      task: "Follow up with Lead on Bugs",
       id: 400,
-      purchased: false
+      completed: false
     },
     {
-      name: "Lunch with Mentor",
+      task: "Lunch with Mentor",
       id: 500,
-      purchased: false
+      completed: false
     },
     {
-      name: "Research New React Libraries",
+      task: "Research New React Libraries",
       id: 600,
-      purchased: false
+      completed: false
     }
   ];
   
