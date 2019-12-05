@@ -31,7 +31,7 @@ class App extends React.Component {
 
   addTask = event => {
     event.preventDefault();
-    
+
     const newTask = { 
       task: this.state.todo, 
       completed: false, 
@@ -78,11 +78,12 @@ class App extends React.Component {
     return (
       <div>
         <h2>The Working Parent To Do List</h2>
+        <h4>Current List</h4>
         <TodoList
           handleToggleComplete={this.toggleTodoComplete}
           todos={this.state.todos}
         />
-      
+        <h4>Add New Task</h4>
         <TodoForm 
           value={this.state.todo}
           handleTodoChange={this.changeToDo}
