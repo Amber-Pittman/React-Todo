@@ -1,6 +1,6 @@
 import React from 'react';
 // import ReactDom from "react-dom";
-import Todo from "./components/TodoComponents/Todo";
+//import Todo from "./components/TodoComponents/Todo";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import TodoList from "./components/TodoComponents/TodoList";
 
@@ -13,54 +13,82 @@ class App extends React.Component {
     super()
 
     this.state = {
-      todo: Todo // uses Todo data file here
-    }
+      todos: [
+        {
+          task: 'Organize Garage',
+          id: 1528817077286,
+          completed: false
+        },
+        {
+          task: 'Bake Cookies',
+          id: 1528817084358,
+          completed: false
+        }
+      ],
+      todo: ''
+    };
   }
 
-  clearCompleted = event => { // for the clear task button
-    event.preventDefault()
+  addTask = event => {
+    event.preventDefault();
+    
+    const newTask = { 
+      task: this.state.todo, 
+      completed: false, 
+      id: Date.now()
+    };
 
     this.setState({
-      todo:this.state.todo.filter(item => {
-        return !item.completed
-      })
-    })
-  }
+      todos: [...this.state.todos, newTask],
+      todo: ""    
+    });
+  };
 
-  addTask = (taskName) => { // for the Add button
-    const newTask = {
-      id: Date.now(), // uses current time for ID instead of my numeric system
-      task: taskName,
-      completed: false
-    }
+  changeToDo = event => this.setState({
+    [event.target.name]: event.target.value
+  });
 
-    this.setState({
-      todo: [newTask, ...this.state.todo]
-    })
-  }
+  toggleTodoComplete = id => { 
+    let todos = this.state.todos.slice();
 
+    todos = todos.map(todo => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed;
+        return todo;
+      } else {
+        return todo
+      }
+    });
+
+    this.setState({ todos });
+  };
+
+  clearCompleted = event => {  // for the clear task button
+    event.preventDefault();
+
+    let todos = this.state.todos.filter(todo => !todo.completed);
+
+    this.setState({ todos });
+  };
+
+ 
 
 
   render() {
     return (
       <div>
-        <div>
-          <h2>The Working Parent To Do List</h2>
-          <TodoForm addItem={this.addItem} />
-        </div>
-
-        <div>
-          {this.state.todo.map(item => (
-            <TodoList key={item.id} // use TodoList component here
-                  item={item} 
-                  onClick={(event) => this.toggleItem(event, item.id)}
-            />
-          ))}
-
-          <button onClick={this.clearCompleted} >
-            Clear Completed
-          </button>
-        </div>
+        <h2>The Working Parent To Do List</h2>
+        <TodoList
+          handleToggleComplete={this.toggleTodoComplete}
+          todos={this.state.todos}
+        />
+      
+        <TodoForm 
+          value={this.state.todo}
+          handleTodoChange={this.changeToDo}
+          handleAddTask={this.addTask}
+          handleClearTodos={this.clearCompleted}
+        />
       </div>
     );
   }
